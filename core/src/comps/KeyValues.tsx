@@ -11,6 +11,7 @@ import { useHighlight } from '../utils/useHighlight';
 import { type SectionElementResult } from '../store/Section';
 import { Copied } from '../comps/Copied';
 import { useIdCompat } from '../comps/useIdCompat';
+import { JsonPathComponent } from '../store/JsonPath';
 
 interface KeyValuesProps<T extends object> extends SectionElementResult<T> {
   expandKey?: string;
@@ -57,7 +58,9 @@ export const KeyValues = <T extends object>(props: KeyValuesProps<T>) => {
     <div className="w-rjv-wrap" style={style}>
       {entries.map(([key, val], idx) => {
         return (
-          <KeyValuesItem parentValue={value} keyName={key} keys={[...keys, key]} value={val} key={idx} level={level} />
+          <JsonPathComponent key={idx} component={key}>
+            <KeyValuesItem parentValue={value} keyName={key} keys={[...keys, key]} value={val} key={idx} level={level} />
+          </JsonPathComponent>
         );
       })}
     </div>

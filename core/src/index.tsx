@@ -34,6 +34,8 @@ import { Row } from './section/Row';
 
 export * from './store';
 export * from './store/Expands';
+export * from './store/JsonPath';
+export * from './store/Section';
 export * from './store/ShowTools';
 export * from './store/Symbols';
 export * from './store/Types';
