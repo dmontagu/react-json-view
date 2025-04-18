@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { Provider } from './store';
 import { Container } from './Container';
 
@@ -62,14 +62,21 @@ export interface JsonViewProps<T extends object>
   /** Determine whether the node should be expanded on the first render, or you can use collapsed to control the level of expansion (by default, the root is expanded). */
   shouldExpandNodeInitially?: (
     isExpanded: boolean,
-    props: { value?: T; keys: (number | string)[]; level: number },
+    props: { value?: T; keys: (number | string)[]; level: number; expandKey: string },
   ) => boolean;
   /** Whether to highlight updates. @default true */
   highlightUpdates?: boolean;
   /** Shorten long JSON strings, Set to `0` to disable this feature @default 30 */
   shortenTextAfterLength?: number;
   /** Callback function for when a treeNode is expanded or collapsed */
-  onExpand?: (props: { expand: boolean; value?: T; keyid: string; keyName?: string | number }) => void;
+  onExpand?: (props: {
+    expand: boolean;
+    value?: T;
+    keyid: string;
+    keyName?: string | number;
+    level: number;
+    event: React.MouseEvent<HTMLDivElement>;
+  }) => void;
   /** Fires event when you copy */
   onCopied?: (text: string, value?: T) => void;
 }

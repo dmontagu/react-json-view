@@ -29,7 +29,7 @@ export const KeyValues = <T extends object>(props: KeyValuesProps<T>) => {
   if (
     expands[expandKey] === undefined &&
     shouldExpandNodeInitially &&
-    shouldExpandNodeInitially(isExpanded, { value, keys, level })
+    shouldExpandNodeInitially(isExpanded, { value, keys, level, expandKey })
   ) {
     return null;
   }
@@ -59,7 +59,14 @@ export const KeyValues = <T extends object>(props: KeyValuesProps<T>) => {
       {entries.map(([key, val], idx) => {
         return (
           <JsonPathComponent key={idx} component={key}>
-            <KeyValuesItem parentValue={value} keyName={key} keys={[...keys, key]} value={val} key={idx} level={level} />
+            <KeyValuesItem
+              parentValue={value}
+              keyName={key}
+              keys={[...keys, key]}
+              value={val}
+              key={idx}
+              level={level}
+            />
           </JsonPathComponent>
         );
       })}

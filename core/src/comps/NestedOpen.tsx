@@ -26,12 +26,13 @@ export const NestedOpen = <T extends object>(props: NestedOpenProps<T>) => {
     typeof collapsed === 'boolean' ? collapsed : typeof collapsed === 'number' ? level > collapsed : false;
   const isObject = typeof value === 'object';
   let isExpanded = expands[expandKey] ?? defaultExpanded;
-  const shouldExpand = shouldExpandNodeInitially && shouldExpandNodeInitially(isExpanded, { value, keys, level });
+  const shouldExpand =
+    shouldExpandNodeInitially && shouldExpandNodeInitially(isExpanded, { value, keys, level, expandKey });
   if (expands[expandKey] === undefined && shouldExpand !== undefined) {
     isExpanded = shouldExpand;
   }
-  const click = () => {
-    const opt = { expand: !isExpanded, value, keyid: expandKey, keyName };
+  const click: React.MouseEventHandler<HTMLDivElement> = (event) => {
+    const opt = { expand: !isExpanded, value, keyid: expandKey, keyName, level, event };
     onExpand && onExpand(opt);
     dispatchExpands({ [expandKey]: opt.expand });
   };

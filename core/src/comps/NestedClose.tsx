@@ -22,7 +22,7 @@ export const NestedClose = <T extends object>(props: NestedCloseProps<T>) => {
   if (
     expands[expandKey] === undefined &&
     shouldExpandNodeInitially &&
-    shouldExpandNodeInitially(isExpanded, { value, keys, level })
+    shouldExpandNodeInitially(isExpanded, { value, keys, level, expandKey })
   ) {
     return null;
   }
